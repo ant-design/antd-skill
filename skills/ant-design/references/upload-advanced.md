@@ -40,7 +40,7 @@
 ## 常见问题与建议
 
 - **受控列表不更新状态**：`onChange` 仅对存在于列表中的文件生效，被移除的文件不会触发后续状态变更。
-- **返回 File 结构兼容**：`beforeUpload` 返回 `false` 时，`info.file` 可能是 `File`，建议统一使用 `info.file.originFileObj`。
+- **返回 File 结构兼容**：`beforeUpload` 返回 `false` 时，`info.file` 是 Upload 组件包装后的对象，建议统一使用 `info.file.originFileObj` 来获取原始的 `File` 对象。
 - **禁用状态一致性**：自定义 `Upload` 子元素时需要同步传递 `disabled`。
 
 ## 参考文档
