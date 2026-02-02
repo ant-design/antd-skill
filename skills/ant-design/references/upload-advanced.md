@@ -1,18 +1,21 @@
 # 上传（Upload）复杂场景参考
 
-## 适用范围
-
+## 适用场景边界
 - 受控文件列表、断点/自定义上传流程
 - 图片预览、拖拽上传、目录上传
 - 与业务接口深度整合（自定义请求、进度、鉴权）
 
-## 关键原则
-
+## 推荐模式（1–2 种）
 - **受控与非受控**：
   - 使用 `defaultFileList` 进行非受控初始值。
   - 使用 `fileList` + `onChange` 完全受控。
 - **上传前拦截**：`beforeUpload` 返回 `false` 或 reject 可以阻止上传；返回 `Upload.LIST_IGNORE` 会忽略该文件，不进入列表。
 - **自定义请求**：使用 `customRequest` 接管默认 XHR 行为，可通过 `info.defaultRequest` 调用默认上传逻辑。
+
+## 必须避免的反模式
+- 受控 `fileList` 不同步 `onChange`，导致 UI 与状态不一致。
+- `beforeUpload` 返回 `false` 后仍假定 `info.file` 结构固定。
+- 自定义上传不处理失败与重试路径。
 
 ## 常见实践
 
@@ -42,6 +45,22 @@
 - **受控列表不更新状态**：`onChange` 仅对存在于列表中的文件生效，被移除的文件不会触发后续状态变更。
 - **返回 File 结构兼容**：`beforeUpload` 返回 `false` 时，`info.file` 是 Upload 组件包装后的对象，建议统一使用 `info.file.originFileObj` 来获取原始的 `File` 对象。
 - **禁用状态一致性**：自定义 `Upload` 子元素时需要同步传递 `disabled`。
+
+## 最小示例
+```tsx
+const [fileList, setFileList] = useState([]);
+
+<Upload
+  fileList={fileList}
+  onChange={({ fileList: next }) => setFileList(next)}
+  beforeUpload={() => false}
+>
+  <Button>Upload</Button>
+</Upload>;
+```
+
+## 与主 Skill 的回跳说明
+- 若问题只涉及“是否受控/是否 customRequest”，回到主 Skill 的组件选型规则。
 
 ## 参考文档
 

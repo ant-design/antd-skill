@@ -1,16 +1,19 @@
 # 表单（Form）复杂场景参考
 
-## 适用范围
-
+## 适用场景边界
 - 动态表单（`Form.List`）、多级嵌套 `name`、跨字段联动校验
 - 复杂校验与性能优化（`dependencies` / `shouldUpdate` / `Form.useWatch`）
 - 表单值由外部状态管理驱动（受控 `fields` / `form.setFieldsValue`）
 
-## 关键原则
-
+## 推荐模式（1–2 种）
 - **表单作为数据源**：不要在每个表单控件上用 `value` 或 `defaultValue` 管理值，而是通过 `Form` 的 `initialValues` 或 `form.setFieldsValue` 进行。`initialValues` 不能通过 `setState` 动态更新。
 - **增量更新**：Form 只更新改动的字段。若需要实时渲染依赖值，用 `Form.useWatch` 或 `Form.Item` 的 `renderProps`。
 - **依赖优先**：字段间联动优先用 `dependencies`。`dependencies` 不建议与 `shouldUpdate` 同时使用，避免更新逻辑冲突。
+
+## 必须避免的反模式
+- 在控件上混用 `value`/`defaultValue` 与 Form 管理。
+- 动态表单靠 `setState` 直接改 `initialValues`。
+- 同时使用 `dependencies` 和 `shouldUpdate` 做同一联动。
 
 ## 常见实践
 
@@ -48,6 +51,29 @@
 - **隐藏字段**：`hidden` 字段仍会收集与校验；移除字段后是否保留值由 `preserve` 控制。
 - **校验节奏**：`validateTrigger`、`validateDebounce`、`validateFirst` 组合使用以控制体验与性能。
 - **统一文案**：使用 `Form` 的 `validateMessages` 或 `ConfigProvider` 的 `form.validateMessages` 统一校验提示。
+
+## 最小示例
+```tsx
+const [form] = Form.useForm();
+
+<Form form={form} initialValues={{ type: "A" }}>
+  <Form.Item name="type">
+    <Select options={[{ value: "A" }, { value: "B" }]} />
+  </Form.Item>
+  <Form.Item dependencies={["type"]} noStyle>
+    {({ getFieldValue }) =>
+      getFieldValue("type") === "B" ? (
+        <Form.Item name="extra" rules={[{ required: true }]}>
+          <Input />
+        </Form.Item>
+      ) : null
+    }
+  </Form.Item>
+</Form>
+```
+
+## 与主 Skill 的回跳说明
+- 若问题仅是“是否让 Form 托管”或“是否需要外部状态”，回到主 Skill 的决策链即可。
 
 ## 参考文档
 

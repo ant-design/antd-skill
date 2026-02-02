@@ -1,16 +1,19 @@
 # 树形控件（Tree）复杂场景参考
 
-## 适用范围
-
+## 适用场景边界
 - 异步加载节点（`loadData`）
 - 勾选联动、严格勾选（`checkStrictly`）
 - 大数据量、虚拟滚动、拖拽
 
-## 关键原则
-
+## 推荐模式（1–2 种）
 - **数据来源**：优先使用 `treeData`，无需手写 `TreeNode`。
 - **字段映射**：通过 `fieldNames` 映射 `title` / `key` / `children` 字段。
 - **默认属性仅初始化生效**：`defaultExpandAll` 等 `default*` 属性仅在初始化时生效，异步加载场景应使用 `expandedKeys` 受控。
+
+## 必须避免的反模式
+- 异步加载场景仍依赖 `defaultExpandAll`。
+- 大数据量使用 `TreeNode` 手写结构，导致性能与维护成本上升。
+- 忽视 `checkStrictly` 的数据结构差异。
 
 ## 常见实践
 
@@ -38,6 +41,19 @@
 
 - **禁用节点传导**：当节点为 `disabled`，勾选/展开状态不会向其父子节点传导。
 - **虚拟滚动限制**：虚拟滚动仅渲染可视区域，超长标题可能需要额外样式处理。
+
+## 最小示例
+```tsx
+<Tree
+  treeData={data}
+  loadData={onLoad}
+  expandedKeys={expandedKeys}
+  onExpand={setExpandedKeys}
+/>;
+```
+
+## 与主 Skill 的回跳说明
+- 若问题只涉及“是否需要异步或严格勾选”，回到主 Skill 的分流与组件选型规则。
 
 ## 参考文档
 
