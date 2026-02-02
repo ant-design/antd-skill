@@ -13,7 +13,7 @@
   - 远程搜索建议设置 `showSearch` 且 `filterOption={false}`，在 `onSearch` 中发起请求。
 - **选项数据**：
   - 使用 `options`（对象数组）比 JSX `Option` 具有更好性能。
-  - 当使用 `options` 时，搜索字段应设置 `showSearch.optionFilterProp="label"`。
+- 当使用 `options` 时，搜索字段应设置 `optionFilterProp="label"`。
 - **值结构**：
   - `labelInValue` 会将值变为 `{ value, label }` 结构，需要在业务层处理。
 
