@@ -1,24 +1,43 @@
-# antd-skill
+# Ant Design Skills
 
-用于维护 Ant Design 相关的 skill 与 reference 文档。
+English | [简体中文](README.zh.md)
 
-## 目录结构
+A curated collection of Agent Skills and references for the Ant Design ecosystem.
 
-- `skills/ant-design/`：Ant Design 相关 skill 与核心组件 reference
-- `skills/ant-design-pro/`：Ant Design Pro 相关 skill 与 reference
-- `skills/ant-design-x/`：Ant Design X 相关 skill 与 reference
+## Installation
 
-## 使用方式
+```bash
+pnpx skills add ant-design/antd-skill
+# or
+npx skills add ant-design/antd-skill
+```
 
-1. 阅读主 Skill：`skills/ant-design/SKILL.md`
-2. 复杂场景细节查阅对应 `references/*.md`
+## Skills
 
-## 适用范围
+| Skill | Description | Path |
+| --- | --- | --- |
+| ant-design | antd v6 component selection, theming/tokens, SSR, and performance | `skills/ant-design/` |
+| ant-design-pro | layouts, routing, access control for Pro 5 + ProComponents | `skills/ant-design-pro/` |
+| ant-design-x | AI & chat UI components and patterns | `skills/ant-design-x/` |
+
+## Usage
+
+1. Read the main skill entry: `skills/<skill>/SKILL.md`
+2. Use references for advanced cases: `skills/<skill>/references/*.md`
+
+## Scope
 
 - antd v6 + React 18–19
-- v5 维护与迁移内容见 `references/antd-v5.md`
+- Ant Design Pro 5 + ProComponents
+- Ant Design X (AI/chat UI)
+- antd v5 maintenance and migration notes: `skills/ant-design/references/antd-v5.md`
 
-## 约定
+## Structure
 
-- 主 Skill 仅提供决策与规则
-- 复杂实现与示例放在 reference
+- `skills/ant-design/`
+- `skills/ant-design-pro/`
+- `skills/ant-design-x/`
+
+## License
+
+MIT. See `LICENSE.md`.
