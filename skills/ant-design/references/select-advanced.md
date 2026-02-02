@@ -1,13 +1,11 @@
 # 选择器（Select）复杂场景参考
 
-## 适用范围
-
+## 适用场景边界
 - 远程搜索、异步加载选项
 - 多选/标签模式、复杂渲染
 - 大数据量下的虚拟滚动与可访问性
 
-## 关键原则
-
+## 推荐模式（1–2 种）
 - **搜索逻辑**：
   - `showSearch` 启用搜索输入。
   - 远程搜索建议设置 `showSearch` 且 `filterOption={false}`，在 `onSearch` 中发起请求。
@@ -16,6 +14,11 @@
   - 当使用 `options` 时，搜索字段应设置 `showSearch.optionFilterProp="label"`。
 - **值结构**：
   - `labelInValue` 会将值变为 `{ value, label }` 结构，需要在业务层处理。
+
+## 必须避免的反模式
+- 远程搜索时仍开启本地过滤，导致结果被二次过滤。
+- 选项数量大仍用 JSX `Option`，导致性能问题。
+- 自定义 `suffixIcon` 可点击但阻断下拉打开。
 
 ## 常见实践
 
@@ -41,6 +44,19 @@
 
 - 若需要屏幕阅读器完整访问列表，可设置 `virtual={false}`。
 - 自定义 `suffixIcon` 时，若该图标需要点击，应处理 `pointer-events` 以避免阻断打开行为。
+
+## 最小示例
+```tsx
+<Select
+  showSearch
+  filterOption={false}
+  onSearch={(q) => fetchOptions(q)}
+  options={options}
+/>;
+```
+
+## 与主 Skill 的回跳说明
+- 若问题只涉及“本地还是远程搜索”或“是否多选”，回到主 Skill 的组件选型规则。
 
 ## 参考文档
 
