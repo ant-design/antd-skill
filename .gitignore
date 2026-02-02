@@ -1,7 +1,13 @@
+.cache
 .DS_Store
 .idea/
 .vscode/
-node_modules/
+*.log
+*.tgz
+coverage
 dist/
 build/
-*.log
+lib-cov
+logs
+node_modules/
+temp
