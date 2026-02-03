@@ -18,19 +18,11 @@ Generate and maintain Agent Skills for the Ant Design ecosystem.
     ├── ant-design/
     │   ├── SKILL.md
     │   └── references/
-    ├── ant-design-pro/
-    │   ├── SKILL.md
-    │   └── references/
-    └── ant-design-x/
-        ├── SKILL.md
-        └── references/
 ```
 
 ## Scope by skill
 
-- **ant-design**: antd v6 + React 18-19, component selection, theming/tokens, SSR, a11y, performance.
-- **ant-design-pro**: Ant Design Pro 5 + ProComponents, layouts, routing, access control, CRUD patterns.
-- **ant-design-x**: Ant Design X (AI/chat UI) patterns and components.
+- **ant-design**: antd v6 + React 18-19, component selection, theming/tokens, SSR, a11y, performance, plus Pro 5 layouts/routing/access/CRUD and X (AI/chat UI) patterns.
 
 ## Updating skills
 

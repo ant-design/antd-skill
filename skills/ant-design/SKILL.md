@@ -1,15 +1,14 @@
 ---
 name: ant-design
-description: Ant Design 6.x guidance for selecting components, theming/tokens, css-in-js/SSR setup, and resolving antd component behavior in React/Next.js/Umi/Vite apps. Use when building or reviewing UI with antd, configuring ConfigProvider/theme, or troubleshooting Ant Design UI/SSR/performance issues.
+description: Ant Design ecosystem guidance covering antd 6.x, Ant Design Pro 5/ProComponents, and Ant Design X v2 (AI/chat UI). Use when making component/layout decisions, theming/tokens, SSR, routing/access, CRUD patterns, or AI chat UI integrations.
 ---
 
 # Ant Design
 
 ## S - Scope
-- Target: antd@^6 with React 18-19 (per official docs).
-- Cover: core components, theming/tokens, css-in-js, SSR, a11y, and performance patterns.
-- Avoid: Pro routing/layout and ProComponents (use ant-design-pro skill).
-- Avoid: AI chat/copilot UI (use ant-design-x skill).
+- Target: antd@^6 with React 18-19, plus ant-design-pro@^5 / @ant-design/pro-components and @ant-design/x@^2 when applicable.
+- Cover: core components, theming/tokens, css-in-js, SSR, a11y, performance, Pro layouts/routing/access/CRUD, and X (AI/chat UI) patterns.
+- Avoid: undocumented APIs, internal `.ant-*` class coupling, or cross-version mixing without explicit request.
 
 ### Default assumptions (when not specified)
 - Language: TypeScript.
@@ -20,6 +19,7 @@ description: Ant Design 6.x guidance for selecting components, theming/tokens, c
 ### Scope rules (must follow)
 - Use only officially documented antd APIs and patterns.
 - Do not invent props, events, or component names.
+- Use only officially documented Pro/X APIs and patterns.
 - Assume v6 by default; do not mix v5 APIs unless explicitly requested.
 - Do not add global `.ant-*` overrides; prefer tokens and component tokens.
 - Keep examples short; no long, multi-screen samples in the main skill.
@@ -35,6 +35,9 @@ description: Ant Design 6.x guidance for selecting components, theming/tokens, c
 - Async load, checkStrictly, or virtualization (Tree).
 - Controlled `fileList`, `customRequest`, preview/auth edge cases (Upload).
 - SSR style order, streaming/hydration errors, or performance bottlenecks.
+- Pro layouts, route-driven menus, or access control (Layout/Access).
+- ProTable/ProForm with request coupling, dynamic fields, or perf tuning.
+- X streaming, tool rendering, or Markdown extensions beyond the defaults.
 
 ### `Reference` index (Chinese)
 Topic | Description | `Reference`
@@ -46,6 +49,14 @@ Table advanced | Sorting/filtering/virtualization patterns | `references/table-a
 Upload advanced | Controlled upload, customRequest, edge cases | `references/upload-advanced.md`
 Select advanced | Remote search, tags, rendering and a11y | `references/select-advanced.md`
 Tree advanced | Async load, checkStrictly, virtual | `references/tree-advanced.md`
+Pro v5 | Pro 5 scope and baseline guidance | `references/pro-v5.md`
+Pro layout | Layouts, menus, access, multi-layout patterns | `references/pro-layout-advanced.md`
+ProTable | Query/table coupling, request patterns, perf | `references/protable-advanced.md`
+ProForm | Step forms, dynamic fields, table linkage | `references/proform-advanced.md`
+X v2 | X v2 scope and baseline guidance | `references/x-v2.md`
+X components | Message/tool component patterns | `references/x-components-advanced.md`
+X SDK | Streaming integration and state model | `references/x-sdk-advanced.md`
+X Markdown | X Markdown extensions and rendering | `references/x-markdown-advanced.md`
 
 ### Reference routing rule
 - Do not expand advanced topics in the main skill.
@@ -56,19 +67,23 @@ Tree advanced | Async load, checkStrictly, virtual | `references/tree-advanced.m
   - Complex accessibility requirements.
 
 ## P - Process
-### 1) Clarify context before advising
+### 1) Identify the layer first
+- Core antd UI, Pro admin app, or X chat/agent UI?
+- If Pro or X is involved, route to the relevant `Reference` when complexity triggers match.
+
+### 2) Clarify context before advising
 - Framework and rendering: Next.js / Umi / Vite? CSR / SSR / streaming?
 - antd version: confirm v6 if unclear.
 - Theming depth: small token changes or component-level overrides?
 - Data scale: large lists/tables/trees/selects?
 - Interaction complexity: controlled state, linkage, async, auth, upload flows?
 
-### 2) Provider minimal set
+### 3) Provider minimal set
 - CSR: usually `ConfigProvider` only.
 - SSR or strict style order: add `StyleProvider` as per `references/antd-v6.md`.
 - One app, one root provider; local themes only for isolation needs.
 
-### 3) Component selection rules
+### 4) Component selection rules (core antd)
 - Form: prefer `Form` as source of truth unless external state is required.
 - Overlay: `Modal` for blocking flows; `Drawer` for side context or long content.
 - Lists: structured data uses `Table`, light lists use `List`; `Table` needs stable `rowKey`.
@@ -76,17 +91,26 @@ Tree advanced | Async load, checkStrictly, virtual | `references/tree-advanced.m
 - Select: local filter uses `filterOption`; remote search uses `showSearch` + `filterOption={false}` + `onSearch` (see `references/select-advanced.md`).
 - Upload: controlled flow uses `fileList`; complex flow uses `customRequest` (see `references/upload-advanced.md`).
 
-### 4) Theming decision chain
+### 5) Pro decision shortcuts (when Pro is in scope)
+- Routes are the menu source of truth; avoid hand-built menus.
+- Access control is page-first; UI hides are secondary; backend still enforces.
+- CRUD uses ProTable/ProForm schemas as the source of truth (see Pro references).
+
+### 6) X decision shortcuts (when X is in scope)
+- Model messages/tools as serializable data; JSX is a pure view.
+- Streaming needs stable keys, throttled updates, and scroll management (see X references).
+
+### 7) Theming decision chain
 1. Use global tokens for most cases.
 2. Use component tokens or `classNames`/`styles` for differences.
 3. Only if unavoidable, use scoped CSS overrides and state the risk.
 4. Never rely on global `.ant-*` overrides.
 
-### 5) Shunt complexity to `Reference`
+### 8) Shunt complexity to `Reference`
 - If any complex trigger matches, provide decision + minimal skeleton + `Reference` path.
 - Details live in the corresponding `references/*.md`.
 
-### 6) a11y and performance checks
+### 9) a11y and performance checks
 - a11y: keyboard access, focus management for overlays, icon buttons with `aria-label`, not color-only states.
 - perf: stable keys, memoized columns, avoid frequent setState, use virtualization and throttling as needed.
 
@@ -95,6 +119,8 @@ Tree advanced | Async load, checkStrictly, virtual | `references/tree-advanced.m
 - Component and layout recommendations with 1-3 sentence rationale.
 - Minimal provider and theming strategy.
 - SSR, perf, and a11y risks with concrete mitigations.
+- Pro: route/layout plan, access model, and ProTable/ProForm schema when relevant.
+- X: message/tool schema and streaming state model when relevant.
 - A `Reference` path when complex triggers match.
 - Advice only (no code) when the request is selection or decision guidance.
 
@@ -112,3 +138,5 @@ Tree advanced | Async load, checkStrictly, virtual | `references/tree-advanced.m
 - [ ] Upload: controlled vs uncontrolled mode is clear; failure and retry flows defined.
 - [ ] Overlays: close and destroy behavior is defined (`destroyOnClose` etc).
 - [ ] Performance: stable keys and memoization; virtualization or throttling when needed.
+- [ ] Pro: route-driven menus/access are consistent with backend enforcement.
+- [ ] X: streaming state, stop/retry, and tool rendering are deterministic.

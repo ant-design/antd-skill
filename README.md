@@ -16,9 +16,7 @@ npx skills add ant-design/antd-skill
 
 | Skill | Description | Path |
 | --- | --- | --- |
-| ant-design | antd v6 component selection, theming/tokens, SSR, and performance | `skills/ant-design/` |
-| ant-design-pro | layouts, routing, access control for Pro 5 + ProComponents | `skills/ant-design-pro/` |
-| ant-design-x | AI & chat UI components and patterns | `skills/ant-design-x/` |
+| ant-design | antd v6 + Ant Design Pro 5 + Ant Design X v2 decision guidance | `skills/ant-design/` |
 
 ## Usage
 
@@ -28,15 +26,13 @@ npx skills add ant-design/antd-skill
 ## Scope
 
 - antd v6 + React 18–19
-- Ant Design Pro 5 + ProComponents
-- Ant Design X (AI/chat UI)
+- Ant Design Pro 5 + ProComponents (layouts, routing, access, CRUD)
+- Ant Design X v2 (AI/chat UI, streaming, tool rendering)
 - antd v5 maintenance and migration notes: `skills/ant-design/references/antd-v5.md`
 
 ## Structure
 
 - `skills/ant-design/`
-- `skills/ant-design-pro/`
-- `skills/ant-design-x/`
 
 ## Skills Backed by Official Documentation
 
@@ -44,9 +40,7 @@ Each skill is a decision-focused guide derived from the official Ant Design ecos
 
 | Skill | Description | Source |
 | --- | --- | --- |
-| ant-design | antd v6 component selection, theming/tokens, SSR, a11y, performance | ant.design |
-| ant-design-pro | Pro 5 + ProComponents layouts, routing, access control, CRUD patterns | pro.ant.design / procomponents.ant.design |
-| ant-design-x | @ant-design/x v2 AI/chat UI, streaming messages, tool rendering | x.ant.design |
+| ant-design | antd v6, Pro 5 + ProComponents, and X v2 decision guide | ant.design / pro.ant.design / procomponents.ant.design / x.ant.design |
 
 ## FAQ
 
@@ -56,9 +50,7 @@ It focuses on agent decision-making for Ant Design projects, not end-user tutori
 
 ### Which Skill Should I Use?
 
-- `ant-design`: core antd components, theming, SSR, a11y, performance
-- `ant-design-pro`: admin layouts, routing, access control, CRUD with ProComponents
-- `ant-design-x`: AI/chat UI, streaming message state, tool rendering
+Use `ant-design` for core antd components, Pro layouts/routing/access/CRUD, and X chat/streaming/tool UI. Complex cases should jump to the relevant `references/*.md` within that skill.
 
 ### How Do I Extend It?
 
