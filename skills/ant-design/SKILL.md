@@ -17,9 +17,9 @@ description: Single-file decision guide for antd 6.x, Ant Design Pro 5/ProCompon
 
 ### Mandatory rules
 - For component questions, first map the component name to the official route slug `{components}` (lowercase kebab-case, e.g. `TreeSelect -> tree-select`, `Button -> button`), then request docs in this order (CN first, EN fallback):
-  1. `https://ant.design/components/{components}-cn.md`
-  2. `https://ant.design/components/{components}.md`
-  - Examples: `tree-select-cn.md -> tree-select.md`, `button-cn.md -> button.md`.
+  1. `https://ant.design/components/{components}-cn`
+  2. `https://ant.design/components/{components}`
+  - Examples: `tree-select-cn -> tree-select`, `button-cn -> button`.
 - Use only documented antd/Pro/X APIs.
 - Do not invent props/events/component names.
 - Do not rely on internal DOM or `.ant-*` selectors.
