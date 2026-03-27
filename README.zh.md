@@ -17,6 +17,7 @@ npx skills add ant-design/antd-skill
 | Skill | 说明 | 目录 |
 | --- | --- | --- |
 | ant-design | antd v6 + Ant Design Pro 5 + Ant Design X v2 的决策指南 | `skills/ant-design/` |
+| antd | 基于离线 Ant Design CLI 的 API 查询、排障、迁移与分析工作流 | `skills/antd/` |
 
 ## 使用方式
 
@@ -33,6 +34,7 @@ npx skills add ant-design/antd-skill
 ## 目录结构
 
 - `skills/ant-design/`
+- `skills/antd/`
 
 ## 基于官方文档整理的技能
 
@@ -41,6 +43,7 @@ npx skills add ant-design/antd-skill
 | 技能 | 描述 | 来源 |
 | --- | --- | --- |
 | ant-design | antd v6、Pro 5 + ProComponents、X v2 决策指南 | ant.design / pro.ant.design / procomponents.ant.design / x.ant.design |
+| antd | 用于离线元数据和迁移任务的 Ant Design CLI 工作流 | @ant-design/cli |
 
 ## 常问问题
 
@@ -50,7 +53,7 @@ npx skills add ant-design/antd-skill
 
 ### 应该选择哪个技能？
 
-统一使用 `ant-design`：涵盖 antd 核心组件、Pro 布局/路由/权限/CRUD，以及 X 的 AI/Chat UI、流式状态与工具渲染，均在一个 `SKILL.md` 中。
+使用 `ant-design` 处理核心 antd 组件、Pro 的布局/路由/权限/CRUD，以及 X 的 AI/Chat UI、流式状态与工具渲染。需要离线 `@ant-design/cli` 查询 API、执行 lint、做迁移或查看 changelog 时，使用 `antd`。
 
 ### 如何扩展？
 

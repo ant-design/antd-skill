@@ -17,6 +17,7 @@ npx skills add ant-design/antd-skill
 | Skill | Description | Path |
 | --- | --- | --- |
 | ant-design | antd v6 + Ant Design Pro 5 + Ant Design X v2 decision guidance | `skills/ant-design/` |
+| antd | Offline Ant Design CLI workflow for API lookup, debugging, migration, and usage analysis | `skills/antd/` |
 
 ## Usage
 
@@ -33,6 +34,7 @@ npx skills add ant-design/antd-skill
 ## Structure
 
 - `skills/ant-design/`
+- `skills/antd/`
 
 ## Skills Backed by Official Documentation
 
@@ -41,6 +43,7 @@ Each skill is a decision-focused guide derived from the official Ant Design ecos
 | Skill | Description | Source |
 | --- | --- | --- |
 | ant-design | antd v6, Pro 5 + ProComponents, and X v2 decision guide | ant.design / pro.ant.design / procomponents.ant.design / x.ant.design |
+| antd | Ant Design CLI workflow for offline metadata and migration tasks | @ant-design/cli |
 
 ## FAQ
 
@@ -50,7 +53,7 @@ It focuses on agent decision-making for Ant Design projects, not end-user tutori
 
 ### Which Skill Should I Use?
 
-Use `ant-design` for core antd components, Pro layouts/routing/access/CRUD, and X chat/streaming/tool UI, all from one `SKILL.md`.
+Use `ant-design` for core antd components, Pro layouts/routing/access/CRUD, and X chat/streaming/tool UI, all from one `SKILL.md`. Use `antd` when you specifically want the offline `@ant-design/cli` workflow for API lookup, linting, migration, and changelog analysis.
 
 ### How Do I Extend It?
 
