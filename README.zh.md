@@ -6,11 +6,49 @@
 
 ## 安装
 
+### 方式一：`skills` CLI（推荐）
+
 ```bash
 pnpx skills add ant-design/antd-skill
 # or
 npx skills add ant-design/antd-skill
 ```
+
+会把 skill 目录拷贝到当前作用域的 `.claude/skills/` 下。
+
+### 方式二：Claude Code CLI（手动安装）
+
+Claude Code 会从以下两个位置发现 skill：
+
+- **用户级** — `~/.claude/skills/<name>/`（所有会话可用）
+- **项目级** — `<repo>/.claude/skills/<name>/`（仅当前项目可用，可提交到仓库共享给团队）
+
+安装到用户级：
+
+```bash
+git clone https://github.com/ant-design/antd-skill.git /tmp/antd-skill
+mkdir -p ~/.claude/skills
+cp -R /tmp/antd-skill/skills/ant-design ~/.claude/skills/
+cp -R /tmp/antd-skill/skills/antd       ~/.claude/skills/
+```
+
+安装到单个项目：
+
+```bash
+mkdir -p .claude/skills
+cp -R /tmp/antd-skill/skills/ant-design .claude/skills/
+cp -R /tmp/antd-skill/skills/antd       .claude/skills/
+```
+
+在 Claude Code 会话中确认：
+
+```
+/skills
+```
+
+列表里应能看到 `ant-design` 和 `antd`。命中各自 `description` 中的触发条件（antd 组件开发、CLI 查询、版本迁移等）时会自动加载。
+
+后续升级：重新拉取仓库再覆盖；或把 `~/.claude/skills/<name>` 改为本地 clone 的软链。
 
 ## 技能列表
 
@@ -58,3 +96,7 @@ npx skills add ant-design/antd-skill
 ### 如何扩展？
 
 Fork 此仓库，复制一个 skill 目录并更新 `SKILL.md`，同时更新两份 readme 的表格以保持目录准确。
+
+### 如何在 Claude Code 中使用？
+
+把需要的 skill 目录拷贝到 `~/.claude/skills/`（用户级）或 `<repo>/.claude/skills/`（项目级），在 Claude Code 会话中执行 `/skills` 查看是否已加载。命中 `description` 中的触发条件时会自动启用。
