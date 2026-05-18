@@ -6,11 +6,49 @@ A curated collection of Agent Skills for the Ant Design ecosystem.
 
 ## Installation
 
+### Option 1: `skills` CLI (recommended)
+
 ```bash
 pnpx skills add ant-design/antd-skill
 # or
 npx skills add ant-design/antd-skill
 ```
+
+This copies the skill folders into your current scope's `.claude/skills/` directory.
+
+### Option 2: Claude Code CLI (manual)
+
+Claude Code discovers skills in two locations:
+
+- **User scope** — `~/.claude/skills/<name>/` (available in every session)
+- **Project scope** — `<repo>/.claude/skills/<name>/` (available only in that project; committable)
+
+Install user-wide:
+
+```bash
+git clone https://github.com/ant-design/antd-skill.git /tmp/antd-skill
+mkdir -p ~/.claude/skills
+cp -R /tmp/antd-skill/skills/ant-design ~/.claude/skills/
+cp -R /tmp/antd-skill/skills/antd       ~/.claude/skills/
+```
+
+Install into a single project:
+
+```bash
+mkdir -p .claude/skills
+cp -R /tmp/antd-skill/skills/ant-design .claude/skills/
+cp -R /tmp/antd-skill/skills/antd       .claude/skills/
+```
+
+Verify in a Claude Code session:
+
+```
+/skills
+```
+
+The `ant-design` and `antd` skills should appear in the list. They auto-load when the conversation matches their `description` triggers (antd component work, CLI lookups, migrations, etc.).
+
+To update later, re-pull the repo and re-copy, or replace the folders with symlinks to a local clone.
 
 ## Skills
 
@@ -58,3 +96,7 @@ Use `ant-design` for core antd components, Pro layouts/routing/access/CRUD, and 
 ### How Do I Extend It?
 
 Fork this repo, copy an existing skill folder, and update `SKILL.md`. Then update the tables in both readmes so the catalog stays accurate.
+
+### How Do I Use It in Claude Code?
+
+Copy the desired skill folder(s) into `~/.claude/skills/` (user scope) or `<repo>/.claude/skills/` (project scope), then run `/skills` in a Claude Code session to confirm they are listed. Skills auto-load when the conversation matches their `description` triggers.
