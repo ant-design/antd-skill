@@ -1,9 +1,17 @@
 ---
-name: ant-design
-description: Decision guide for antd 6.x, Ant Design Pro 5/ProComponents, Ant Design X v2, and the offline `@ant-design/cli`. Use for component selection, theming/tokens, SSR, a11y, performance, routing/access/CRUD, AI/chat UI patterns, local API lookup, debugging, migration, and usage analysis.
+name: ant-design-v6
+description: Decision guide for antd 6.x projects (`antd@^6` in package.json), Ant Design Pro 5/ProComponents, Ant Design X v2, and the offline `@ant-design/cli`. Use for component selection, theming/tokens, SSR, a11y, performance, routing/access/CRUD, AI/chat UI patterns, local API lookup, debugging, migration, and usage analysis. For antd 5.x projects, use the `ant-design-v5` skill instead.
 ---
 
-# Ant Design
+# Ant Design v6
+
+## Version routing (read first)
+- This skill targets **antd 6.x only**. Confirm the project's antd version before applying any guidance:
+  - Check `package.json` `dependencies.antd` (or `peerDependencies`/`pnpm-lock.yaml`/`package-lock.json`).
+  - If the resolved version is `^6.x` / `>=6.0.0`, continue with this skill.
+  - If the resolved version is `^5.x`, **stop** and switch to the `ant-design-v5` skill — v5 uses `@ant-design/cssinjs` directly, different theme tokens, and several renamed props.
+  - If the project has no antd installed yet, ask the user which major version they want to target before proceeding.
+- The `antd` CLI skill is version-agnostic and complements either skill via `--version <x.y.z>`.
 
 ## S - Scope
 - Target: `antd@^6` + React 18-19, with `ant-design-pro@^5` / `@ant-design/pro-components` and `@ant-design/x@^2` when needed.
