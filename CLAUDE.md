@@ -22,10 +22,11 @@ skills/<name>/
 - `allowed-tools` — optional, list shell commands the skill is permitted to run (see `skills/antd/SKILL.md`)
 
 Existing skills:
-- `skills/ant-design/` — decision guide spanning antd v6, Pro 5/ProComponents, X v2, and the offline CLI. Uses an "S-P-O" (Scope / Process / Output) section structure plus a regression checklist.
-- `skills/antd/` — focused workflow around `@ant-design/cli` for offline API lookup, lint, migrate, doctor, usage, changelog, and bug reporting (`antd bug`, `antd bug-cli`).
+- `skills/ant-design-v5/` — decision guide for antd 5.x projects, Pro 5/ProComponents, X v2. Covers v5 specifics (CSS-in-JS via `@ant-design/cssinjs`, React 19 patch package, legacy-browser compat, deprecated v4 props). Uses the same "S-P-O" (Scope / Process / Output) structure as the v6 skill plus a regression checklist. References: `antd-cli.md`, `cssinjs-ssr.md`.
+- `skills/ant-design-v6/` — decision guide for antd 6.x projects, Pro 5/ProComponents, X v2, and the offline CLI. Uses the "S-P-O" structure plus a regression checklist. Reference: `antd-cli.md`.
+- `skills/antd/` — version-agnostic workflow around `@ant-design/cli` for offline API lookup, lint, migrate, doctor, usage, changelog, and bug reporting (`antd bug`, `antd bug-cli`). Pairs with either version skill via `--version <x.y.z>`.
 
-The two skills overlap intentionally: `ant-design` is the broader decision guide and links to the CLI workflow as a reference; `antd` is the standalone CLI-only entry point.
+The two `ant-design-v*` skills form a version router: each declares its supported antd major in its `description` and at the top of its `SKILL.md` (a "Version routing" section instructs the agent to check `package.json` and switch skills if the version doesn't match). Keep their structure parallel when editing so the router behavior stays predictable. `antd` is the standalone CLI-only entry point and is referenced from both version skills.
 
 ## Authoring rules (from AGENTS.md)
 
@@ -38,7 +39,7 @@ The two skills overlap intentionally: `ant-design` is the broader decision guide
 ## When updating a skill
 
 1. Read the existing `SKILL.md` and any `references/*.md` first — don't duplicate content that already lives in a reference.
-2. Preserve the skill's structure (the S-P-O headings in `ant-design`, the numbered Scenarios in `antd`).
+2. Preserve the skill's structure (the "Version routing" preamble + S-P-O headings in `ant-design-v5` / `ant-design-v6`, the numbered Scenarios in `antd`). When editing one version skill, mirror the same change in the other if it isn't version-specific, so the two stay parallel.
 3. If you add a reference file, update the `## References` table in the corresponding `SKILL.md`.
 4. If you add or rename a skill, update the tables in **both** `README.md` and `README.zh.md` so the catalog stays in sync (the Chinese readme mirrors the English one).
 

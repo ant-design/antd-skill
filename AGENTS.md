@@ -15,14 +15,23 @@ Generate and maintain Agent Skills for the Ant Design ecosystem.
 ```
 .
 └── skills/
-    ├── ant-design/
+    ├── ant-design-v5/
     │   ├── SKILL.md
     │   └── references/
+    ├── ant-design-v6/
+    │   ├── SKILL.md
+    │   └── references/
+    └── antd/
+        └── SKILL.md
 ```
 
 ## Scope by skill
 
-- **ant-design**: antd v6 + React 18-19, component selection, theming/tokens, SSR, a11y, performance, plus Pro 5 layouts/routing/access/CRUD and X (AI/chat UI) patterns.
+- **ant-design-v5**: antd 5.x + React 16.9-18 (React 19 via `@ant-design/v5-patch-for-react-19`), CSS-in-JS via `@ant-design/cssinjs`, plus Pro 5 layouts/routing/access/CRUD and X (AI/chat UI) patterns.
+- **ant-design-v6**: antd 6.x + React 18-19, component selection, theming/tokens, SSR, a11y, performance, plus Pro 5 layouts/routing/access/CRUD and X (AI/chat UI) patterns.
+- **antd**: offline `@ant-design/cli` workflow (v4/v5/v6) — API lookup, lint, migrate, doctor, usage, changelog, and bug reporting. Version-agnostic; complements both `ant-design-v*` skills.
+
+The two `ant-design-v*` skills form a version router: each declares its supported antd major in its `description` and at the top of its `SKILL.md`, and Claude picks the matching one for the project. When updating either, keep their structure parallel so the router behavior stays predictable.
 
 ## Updating skills
 
